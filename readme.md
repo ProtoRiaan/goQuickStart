@@ -1,0 +1,1 @@
+Gopher exercises was a bit more advanced than where I wanted to start. The Free code Camp Go tutorial seems a better place.
