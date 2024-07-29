@@ -7,8 +7,8 @@ import (
 
 func main() {
 	var conferenceName = "Go Conference"
-	const conferenceTickets int = 50
-	var remainingTickets = 50
+	const conferenceTickets uint = 50
+	var remainingTickets uint = 50
 	var bookings []string
 
 	fmt.Printf("Welcome to %v booking application\n", conferenceName)
@@ -20,7 +20,7 @@ func main() {
 		var firstName string
 		var lastName string
 		var email string
-		var userTickets int
+		var userTickets uint
 		// ask user for their name
 
 		fmt.Println("Enter your username:")
@@ -34,26 +34,24 @@ func main() {
 		fmt.Println("Enter number of tickets:")
 		fmt.Scan(&userTickets)
 
+
 		fmt.Printf("Than you %v %v for booking %v tickets. You will receive confirmation at %v\n", firstName, lastName, userTickets, email)
 
 		remainingTickets = remainingTickets - userTickets
-		fmt.Printf("We have %v tickets remaining\n", remainingTickets)
 		bookings = append(bookings, firstName+" "+lastName)
-
-		fmt.Printf("The whole Array : %v\n", bookings)
-		fmt.Printf("The first falue of the Array: %v\n", bookings[0])
-		fmt.Printf("Array type: %T\n", bookings[0])
-		fmt.Printf("Array length: %v\n", len(bookings))
-
-		fmt.Println(&remainingTickets)
-
-		fmt.Printf("conferenceTickets is %T, remainingTickets is %T\n", conferenceTickets, remainingTickets)
-
 		firstNames := []string{}
 		for _, booking := range bookings {
 			var names = strings.Fields(booking)
 			firstNames = append(firstNames, names[0])
 		}
-		fmt.Printf("User %v booked %v tickets for %v\n", firstNames, userTickets, conferenceName)
+		fmt.Printf("The following users have bookings: %v\nWe have %v tickets remaining\n\n", firstNames, remainingTickets)
+
+		// fmt.Printf("We have %v tickets remaining\n", remainingTickets)
+
+		// fmt.Printf("The whole Array : %v\n", bookings)
+		// fmt.Printf("The first value of the Array: %v\n", bookings[0])
+
+		// fmt.Printf("conferenceTickets is %T, remainingTickets is %T\n", conferenceTickets, remainingTickets)
+
 	}
 }
