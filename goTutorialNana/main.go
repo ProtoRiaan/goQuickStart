@@ -15,7 +15,7 @@ func main() {
 	fmt.Printf("We have a totla of %v tickets and we still have %v tickets available\n", conferenceTickets, remainingTickets)
 	fmt.Println("Get your tickets here to attend")
 
-	for {
+	for remainingTickets > 0 && len(bookings) < 50 {
 		var userName string
 		var firstName string
 		var lastName string
@@ -34,21 +34,19 @@ func main() {
 		fmt.Println("Enter number of tickets:")
 		fmt.Scan(&userTickets)
 
-
-
 		// booking logic
 		// if userTickets > remainingTickets{
 		// 	fmt.Println("We dont have that many tickets available, please try booking less tickets")
 		// 	// break
 		// 	continue
 		// }
-		if userTickets <= remainingTickets{
+		if userTickets <= remainingTickets {
 
 			remainingTickets = remainingTickets - userTickets
 			bookings = append(bookings, firstName+" "+lastName)
-			
+
 			fmt.Printf("Than you %v %v for booking %v tickets. You will receive confirmation at %v\n", firstName, lastName, userTickets, email)
-			
+
 			firstNames := []string{}
 			for _, booking := range bookings {
 				var names = strings.Fields(booking)
@@ -58,7 +56,7 @@ func main() {
 
 			if !(remainingTickets > 0) {
 				// end program
-				fmt.Println ("Our conference is booked out, better luck next time")
+				fmt.Println("Our conference is booked out, better luck next time")
 				break
 			}
 
