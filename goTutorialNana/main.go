@@ -25,14 +25,22 @@ func main() {
 
 		fmt.Println("Enter your username:")
 		fmt.Scan(&userName)
+
 		fmt.Println("Enter your first name:")
 		fmt.Scan(&firstName)
+
 		fmt.Println("Enter your last name:")
 		fmt.Scan(&lastName)
+
 		fmt.Println("Enter your email address: ")
 		fmt.Scan(&email)
+
 		fmt.Println("Enter number of tickets:")
 		fmt.Scan(&userTickets)
+
+		isValidName = len(firstName) >= 2 && len(lastName) >= 2
+		isValidEmail = strings.Contains(email, "@")
+		isValidTickets = userTickets > 0 && userTickets <= remainingTickets
 
 		// booking logic
 		// if userTickets > remainingTickets{
