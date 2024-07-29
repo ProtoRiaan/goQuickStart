@@ -38,9 +38,9 @@ func main() {
 		fmt.Println("Enter number of tickets:")
 		fmt.Scan(&userTickets)
 
-		isValidName = len(firstName) >= 2 && len(lastName) >= 2
-		isValidEmail = strings.Contains(email, "@")
-		isValidTickets = userTickets > 0 && userTickets <= remainingTickets
+		isValidName := len(firstName) >= 2 && len(lastName) >= 2
+		isValidEmail := strings.Contains(email, "@")
+		isValidTickets := userTickets > 0 && userTickets <= remainingTickets
 
 		// booking logic
 		// if userTickets > remainingTickets{
@@ -48,7 +48,7 @@ func main() {
 		// 	// break
 		// 	continue
 		// }
-		if userTickets <= remainingTickets {
+		if isValidEmail && isValidName && isValidTickets {
 
 			remainingTickets = remainingTickets - userTickets
 			bookings = append(bookings, firstName+" "+lastName)
@@ -75,7 +75,16 @@ func main() {
 
 			// fmt.Printf("conferenceTickets is %T, remainingTickets is %T\n", conferenceTickets, remainingTickets)
 		} else {
-			fmt.Println("We dont have that many tickets available, please try booking less tickets")
+			fmt.Println("Your input data is invalid")
+			if !isValidName {
+				fmt.Println("The first name or last name you entered is too short")
+			}
+			if !isValidEmail {
+				fmt.Println("The email you entered is invalid")
+			}
+			if !isValidTickets {
+				fmt.Println("We are not able to process the number of tickets you requested")
+			}
 		}
 	}
 }
