@@ -37,34 +37,39 @@ func main() {
 
 
 		// booking logic
-		if userTickets > remainingTickets{
+		// if userTickets > remainingTickets{
+		// 	fmt.Println("We dont have that many tickets available, please try booking less tickets")
+		// 	// break
+		// 	continue
+		// }
+		if userTickets <= remainingTickets{
+
+			remainingTickets = remainingTickets - userTickets
+			bookings = append(bookings, firstName+" "+lastName)
+			
+			fmt.Printf("Than you %v %v for booking %v tickets. You will receive confirmation at %v\n", firstName, lastName, userTickets, email)
+			
+			firstNames := []string{}
+			for _, booking := range bookings {
+				var names = strings.Fields(booking)
+				firstNames = append(firstNames, names[0])
+			}
+			fmt.Printf("The following users have bookings: %v\nWe have %v tickets remaining\n\n", firstNames, remainingTickets)
+
+			if !(remainingTickets > 0) {
+				// end program
+				fmt.Println ("Our conference is booked out, better luck next time")
+				break
+			}
+
+			// fmt.Printf("We have %v tickets remaining\n", remainingTickets)
+
+			// fmt.Printf("The whole Array : %v\n", bookings)
+			// fmt.Printf("The first value of the Array: %v\n", bookings[0])
+
+			// fmt.Printf("conferenceTickets is %T, remainingTickets is %T\n", conferenceTickets, remainingTickets)
+		} else {
 			fmt.Println("We dont have that many tickets available, please try booking less tickets")
-			break
 		}
-		remainingTickets = remainingTickets - userTickets
-		bookings = append(bookings, firstName+" "+lastName)
-		
-		fmt.Printf("Than you %v %v for booking %v tickets. You will receive confirmation at %v\n", firstName, lastName, userTickets, email)
-		
-		firstNames := []string{}
-		for _, booking := range bookings {
-			var names = strings.Fields(booking)
-			firstNames = append(firstNames, names[0])
-		}
-		fmt.Printf("The following users have bookings: %v\nWe have %v tickets remaining\n\n", firstNames, remainingTickets)
-
-		if !(remainingTickets > 0) {
-			// end program
-			fmt.Println ("Our conference is booked out, better luck next time")
-			break
-		}
-
-		// fmt.Printf("We have %v tickets remaining\n", remainingTickets)
-
-		// fmt.Printf("The whole Array : %v\n", bookings)
-		// fmt.Printf("The first value of the Array: %v\n", bookings[0])
-
-		// fmt.Printf("conferenceTickets is %T, remainingTickets is %T\n", conferenceTickets, remainingTickets)
-
 	}
 }
