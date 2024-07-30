@@ -38,10 +38,7 @@ func main() {
 		fmt.Println("Enter number of tickets:")
 		fmt.Scan(&userTickets)
 
-		isValidName := len(firstName) >= 2 && len(lastName) >= 2
-		isValidEmail := strings.Contains(email, "@")
-		isValidTickets := userTickets > 0 && userTickets <= remainingTickets
-
+		isValidName, isValidEmail, isValidTickets := validateUserInput(firstName, lastName, email, userTickets, remainingTickets)
 		// booking logic
 		// if userTickets > remainingTickets{
 		// 	fmt.Println("We dont have that many tickets available, please try booking less tickets")
