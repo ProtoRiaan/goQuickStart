@@ -1,21 +1,20 @@
 package main
 
 import (
+	"booking-app/helper"
 	"fmt"
-	"strings"
 )
 
 func main() {
 	var conferenceName = "Go Conference"
 	const conferenceTickets uint = 50
 	var remainingTickets uint = 50
-	var bookings []string
 
 	fmt.Printf("Welcome to %v booking application\n", conferenceName)
 	fmt.Printf("We have a totla of %v tickets and we still have %v tickets available\n", conferenceTickets, remainingTickets)
 	fmt.Println("Get your tickets here to attend")
 
-	for remainingTickets > 0 && len(bookings) < 50 {
+	for remainingTickets > 0 && len(helper.Bookings) < 50 {
 		var userName string
 		var firstName string
 		var lastName string
@@ -38,7 +37,7 @@ func main() {
 		fmt.Println("Enter number of tickets:")
 		fmt.Scan(&userTickets)
 
-		isValidName, isValidEmail, isValidTickets := validateUserInput(firstName, lastName, email, userTickets, remainingTickets)
+		isValidName, isValidEmail, isValidTickets := helper.ValidateUserInput(firstName, lastName, email, userTickets, remainingTickets)
 		// booking logic
 		// if userTickets > remainingTickets{
 		// 	fmt.Println("We dont have that many tickets available, please try booking less tickets")
@@ -47,17 +46,7 @@ func main() {
 		// }
 		if isValidEmail && isValidName && isValidTickets {
 
-			remainingTickets = remainingTickets - userTickets
-			bookings = append(bookings, firstName+" "+lastName)
-
-			fmt.Printf("Than you %v %v for booking %v tickets. You will receive confirmation at %v\n", firstName, lastName, userTickets, email)
-
-			firstNames := []string{}
-			for _, booking := range bookings {
-				var names = strings.Fields(booking)
-				firstNames = append(firstNames, names[0])
-			}
-			fmt.Printf("The following users have bookings: %v\nWe have %v tickets remaining\n\n", firstNames, remainingTickets)
+			remainingTickets = helper.BookTickets(remainingTickets, userTickets, firstName, lastName, email)
 
 			if !(remainingTickets > 0) {
 				// end program
