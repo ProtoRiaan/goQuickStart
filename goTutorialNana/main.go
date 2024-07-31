@@ -3,7 +3,14 @@ package main
 import (
 	"booking-app/helper"
 	"fmt"
+	"time"
 )
+
+var userName string
+var firstName string
+var lastName string
+var email string
+var userTickets uint
 
 func main() {
 	var conferenceName = "Go Conference"
@@ -15,20 +22,12 @@ func main() {
 	fmt.Println("Get your tickets here to attend")
 
 	for remainingTickets > 0 && len(helper.Bookings) < 50 {
-		var userName string
-		var firstName string
-		var lastName string
-		var email string
-		var userTickets uint
+		// var userName string
+		// var firstName string
+		// var lastName string
+		// var email string
+		// var userTickets uint
 		// ask user for their name
-
-		type UserData struct {
-			firstName       string
-			lastName        string
-			email           string
-			numberOfTickets uint
-			isVerified      bool
-		}
 
 		fmt.Println("Enter your username:")
 		fmt.Scan(&userName)
@@ -55,6 +54,7 @@ func main() {
 		if isValidEmail && isValidName && isValidTickets {
 
 			remainingTickets = helper.BookTickets(remainingTickets, userTickets, firstName, lastName, email)
+			go sendTicket()
 
 			if !(remainingTickets > 0) {
 				// end program
@@ -81,4 +81,13 @@ func main() {
 			}
 		}
 	}
+}
+
+func sendTicket() {
+	time.Sleep(10 * time.Second)
+	var ticketemail = fmt.Sprintf("%v tickets for %v %v", userTickets, firstName, lastName)
+	fmt.Println("#########################")
+	fmt.Printf("Sending ticket:\n %v \nto email address %v\n", ticketemail, email)
+	fmt.Println("#########################")
+
 }
