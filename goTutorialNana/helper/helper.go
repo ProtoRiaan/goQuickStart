@@ -22,6 +22,14 @@ func BookTickets(remainingTickets uint, userTickets uint, firstName string, last
 
 	var userData = make(map[string]string)
 
+	type UserData struct {
+		firstName       string
+		lastName        string
+		email           string
+		numberOfTickets uint
+		isVerified      bool
+	}
+
 	remainingTickets = remainingTickets - userTickets
 	userData["firstName"] = firstName
 	userData["lastName"] = lastName
