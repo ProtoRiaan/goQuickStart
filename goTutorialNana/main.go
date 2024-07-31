@@ -3,6 +3,7 @@ package main
 import (
 	"booking-app/helper"
 	"fmt"
+	"sync"
 	"time"
 )
 
@@ -11,6 +12,8 @@ var firstName string
 var lastName string
 var email string
 var userTickets uint
+
+var wg = sync.WaitGroup{}
 
 func main() {
 	var conferenceName = "Go Conference"
@@ -54,6 +57,8 @@ func main() {
 		if isValidEmail && isValidName && isValidTickets {
 
 			remainingTickets = helper.BookTickets(remainingTickets, userTickets, firstName, lastName, email)
+
+			wg.Add(1)
 			go sendTicket()
 
 			if !(remainingTickets > 0) {
@@ -81,6 +86,7 @@ func main() {
 			}
 		}
 	}
+	wg.Wait()
 }
 
 func sendTicket() {
@@ -89,5 +95,5 @@ func sendTicket() {
 	fmt.Println("#########################")
 	fmt.Printf("Sending ticket:\n %v \nto email address %v\n", ticketemail, email)
 	fmt.Println("#########################")
-
+	wg.Done()
 }
