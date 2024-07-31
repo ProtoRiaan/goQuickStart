@@ -22,6 +22,14 @@ func main() {
 		var userTickets uint
 		// ask user for their name
 
+		type UserData struct {
+			firstName       string
+			lastName        string
+			email           string
+			numberOfTickets uint
+			isVerified      bool
+		}
+
 		fmt.Println("Enter your username:")
 		fmt.Scan(&userName)
 

@@ -23,11 +23,11 @@ func BookTickets(remainingTickets uint, userTickets uint, firstName string, last
 	var userData = make(map[string]string)
 
 	remainingTickets = remainingTickets - userTickets
-	Bookings = append(Bookings, userData)
 	userData["firstName"] = firstName
 	userData["lastName"] = lastName
 	userData["email"] = email
 	userData["ticketNumber"] = strconv.FormatUint(uint64(userTickets), 10)
+	Bookings = append(Bookings, userData)
 
 	fmt.Printf("Than you %v %v for booking %v tickets. You will receive confirmation at %v\n", firstName, lastName, userTickets, email)
 
