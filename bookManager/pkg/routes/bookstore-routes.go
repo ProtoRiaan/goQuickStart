@@ -1,6 +1,4 @@
 package routes
-<<<<<<< HEAD
-=======
 
 import (
 	"github.com/gorilla/mux"
@@ -14,4 +12,3 @@ var RegisterBookstoreRoutes = func(router *mux.Router) {
 	router.HandleFunc("/book/{bookId}", controllers.UpdateBookBookByID).Methods("PUT")
 	router.HandleFunc("/book/{bookId}", controllers.DeleteBookBookByID).Methods("DELETE")
 }
->>>>>>> df996b5 ( trying to fix this stupid repo)
