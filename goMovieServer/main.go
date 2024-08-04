@@ -44,12 +44,10 @@ func delteMovies(w http.ResponseWriter, r *http.Request) {
 
 func getMovie(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(movies)
 	params := mux.Vars(r)
 	for _, item := range movies {
-		if item.ID == params["ID"] {
+		if item.ID == params["id"] {
 			json.NewEncoder(w).Encode(item)
-			return
 		}
 	}
 	json.NewEncoder(w).Encode(movies)
@@ -97,7 +95,6 @@ func main() {
 	r.HandleFunc("/movies/{id}", updateMovie).Methods("PUT")
 	r.HandleFunc("/movies/{id}", delteMovies).Methods("DELETE")
 
-	fmt.Printf("Starting the server on port 8000\n")
+	fmt.Printf("Starting the server on port 8080\n")
 	log.Fatal(http.ListenAndServe(":8080", r))
-
 }
