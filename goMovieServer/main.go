@@ -64,6 +64,24 @@ func createMovie(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(movies)
 }
 
+func updateMovie(w http.ResponseWriter, r *http.Request) {
+
+	w.Header().Set("Content-Type", "application/json")
+	params := mux.Vars(r)
+
+	for index, item := range movies {
+		if item.ID == params["id"] {
+			movies = append(movies[:index], movies[index+1:]...) // This syntax is deleteing the current movie in the index
+			var movie Movie
+			_ = json.NewDecoder(r.Body).Decode(&movie)
+			movie.ID = params["id"]
+			movies = append(movies, movie)
+			json.NewEncoder(w).Encode(movies)
+		}
+	}
+	json.NewEncoder(w).Encode(movies)
+}
+
 func main() {
 	// Creating Some Movies
 	movies = append(movies, Movie{ID: "1", Isbn: "438227", Title: "Movie One", Director: &Director{Firstname: "John", Lastname: "Doe"}})
@@ -80,6 +98,6 @@ func main() {
 	r.HandleFunc("/movies/{id}", delteMovies).Methods("DELETE")
 
 	fmt.Printf("Starting the server on port 8000\n")
-	log.Fatal(http.ListenAndServe(":8080,r"))
+	log.Fatal(http.ListenAndServe(":8080", r))
 
 }
