@@ -1,4 +1,4 @@
-module github.com/protoriaan/go-bookstore
+module github.com/ProtoRiaan/go-bookstore
 
 go 1.22.5
 
